@@ -1,0 +1,45 @@
+<idea-plugin>
+    <idea-version since-build="211" until-build="213.*" />
+    <id>cn.coderpig.CpStringFormat</id>
+    <name>CpStringFormat</name>
+    <vendor url="http://coderpig.cn">CoderPig</vendor>
+
+    <description><![CDATA[
+    Auto translate words from zh to en and replace<br>
+    <em>Happy~</em>
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationConfigurable
+                displayName="CpStringFormat"
+                id="cn.coderpig.CpStringFormat"
+                groupId="cn.coderpig.CpStringFormat"
+                instance="CpStringFormatConfig"
+        />
+    </extensions>
+
+    <actions>
+        <action id="CnEnLowerULine" class="CnEnLowerULineAction" text="中-&gt;英 (小写+下划线)"
+                description="中-&gt;英 (小写+下划线)">
+            <!--  设置快捷键为ctrl+1  -->
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl 1"/>
+        </action>
+        <action id="CnEnWord" class="CnEnWordAction" text="中-&gt;英(单词首字母大写)"
+                description="中-&gt;英(单词首字母大写)">
+            <!--  设置快捷键为ctrl+2  -->
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl 2"/>
+        </action>
+        <group popup="true" id="StringFormatMenu" text="CpStringFormat" icon="/icons/icon.png">
+            <reference ref="CnEnLowerULine"/>
+            <!-- 设置分割线   -->
+            <separator/>
+            <reference ref="CnEnWord"/>
+            <!-- 添加到右侧菜单栏，并置顶  -->
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </group>
+    </actions>
+</idea-plugin>
